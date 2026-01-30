@@ -19,9 +19,7 @@ services:
       retries: 10
 
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    image: ghcr.io/antoniotomast/webclase-backend:latest
     container_name: webclase-backend
     ports:
       - "8000:8000"
@@ -31,16 +29,21 @@ services:
       - ./templates:/app/templates
     environment:
       - PYTHONUNBUFFERED=1
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=oscar
     depends_on:
       mysql:
         condition: service_healthy
     networks:
       - webclase-network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
+    image: ghcr.io/antoniotomast/webclase-frontend:latest
     container_name: webclase-frontend
     ports:
       - "3000:3000"
@@ -50,6 +53,24 @@ services:
       - VITE_API_URL=http://localhost:8000
     networks:
       - webclase-network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: webclase-watchtower
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=60
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_ROLLING_RESTART=true
+      - DOCKER_API_VERSION=1.44
+    networks:
+      - webclase-network
+    restart: unless-stopped
 
 networks:
   webclase-network:

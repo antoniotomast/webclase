@@ -3,6 +3,7 @@ from typing import Optional
 from datetime import datetime
 
 # Clave secreta para firmar las cookies de sesión (cámbiala en producción)
+# Actualizado: Sistema de sesiones con Watchtower auto-deploy
 SECRET_KEY = "tu_clave_secreta_muy_segura_cambiala_en_produccion"
 
 
