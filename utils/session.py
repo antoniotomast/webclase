@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import datetime
 
 # Clave secreta para firmar las cookies de sesión (cámbiala en producción)
-# Actualizado: Sistema de sesiones con Watchtower auto-deploy
+# Actualizado: Sistema de sesiones con Watchtower auto-deploy v2
 SECRET_KEY = "tu_clave_secreta_muy_segura_cambiala_en_produccion"
 
 
@@ -26,7 +26,7 @@ def crear_sesion(request: Request, user_id: int, username: str, role: str = 'use
             del request.session[key]
             print(f"WARNING: Removed non-serializable key '{key}' from session")
     
-    print(f"DEBUG - Sesión creada: {request.session}")
+    print(f"DEBUG - Sesión creada exitosamente: {request.session}")
     # para logout
     #request.session.popitem("username", None)  # Elimina si existe
 
