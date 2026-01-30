@@ -123,7 +123,7 @@ Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 
 ## 👥 Autor
 
-Antonio Tomas
+Antonio Tomás
 
 ## 🔗 Enlaces
 

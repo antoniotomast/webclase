@@ -4,6 +4,8 @@ let deploymentInProgress = false;
 // Function to show deployment status
 function showDeploymentStatus() {
     const statusBox = document.getElementById('deployment-status');
+    if (!statusBox) return;
+    
     const timestamp = new Date().toLocaleTimeString('es-ES');
     
     if (deploymentInProgress) {
@@ -65,6 +67,8 @@ function deployApplication() {
 // Function to add log entries
 function addLog(message, type = 'info') {
     const logsContainer = document.getElementById('logs');
+    if (!logsContainer) return;
+    
     const logEntry = document.createElement('p');
     logEntry.className = `log-entry log-${type}`;
     
@@ -107,8 +111,11 @@ setInterval(() => {
     if (!deploymentInProgress) {
         const statusBox = document.getElementById('deployment-status');
         if (statusBox && statusBox.innerHTML.includes('Sistema operativo')) {
-            const timestamp = new Date().toLocaleTimeString('es-ES');
-            statusBox.querySelector('p:nth-child(2)').textContent = `Última actualización: ${timestamp}`;
+            const timestampElement = statusBox.querySelector('p:nth-child(2)');
+            if (timestampElement) {
+                const timestamp = new Date().toLocaleTimeString('es-ES');
+                timestampElement.textContent = `Última actualización: ${timestamp}`;
+            }
         }
     }
 }, 30000); // Update every 30 seconds
