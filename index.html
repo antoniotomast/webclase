@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps - Implantación de Aplicaciones Web</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🚀 DevOps Web</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#features">Características</a></li>
+                    <li><a href="#deployment">Despliegue</a></li>
+                    <li><a href="#docs">Documentación</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Plataforma de Despliegue DevOps</h2>
+                <p>Implantación y gestión automatizada de aplicaciones web</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showDeploymentStatus()">Ver Estado</button>
+                    <button class="btn btn-secondary" onclick="deployApplication()">Iniciar Despliegue</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Características Principales</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Despliegue Rápido</h3>
+                        <p>Automatización completa del proceso de despliegue con integración continua.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>CI/CD Pipeline</h3>
+                        <p>Integración y entrega continua con GitHub Actions y Docker.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Monitorización</h3>
+                        <p>Seguimiento en tiempo real del estado de las aplicaciones desplegadas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Seguridad</h3>
+                        <p>Prácticas de seguridad DevSecOps integradas en el pipeline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="deployment" class="deployment">
+            <div class="container">
+                <h2>Panel de Despliegue</h2>
+                <div class="deployment-panel">
+                    <div class="deployment-info">
+                        <h3>Estado del Sistema</h3>
+                        <div id="deployment-status" class="status-box">
+                            <p>Sistema listo para despliegue</p>
+                        </div>
+                    </div>
+                    <div class="deployment-logs">
+                        <h3>Registro de Actividad</h3>
+                        <div id="logs" class="logs-container">
+                            <p class="log-entry">[INFO] Sistema inicializado correctamente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="docs" class="documentation">
+            <div class="container">
+                <h2>Documentación</h2>
+                <div class="docs-content">
+                    <div class="doc-section">
+                        <h3>Requisitos del Sistema</h3>
+                        <ul>
+                            <li>Docker 20.10+</li>
+                            <li>Node.js 16+ (opcional)</li>
+                            <li>Git</li>
+                            <li>Servidor web (nginx/apache)</li>
+                        </ul>
+                    </div>
+                    <div class="doc-section">
+                        <h3>Comandos Básicos</h3>
+                        <div class="code-block">
+                            <code>docker build -t devops-web .</code>
+                            <code>docker run -p 8080:80 devops-web</code>
+                        </div>
+                    </div>
+                    <div class="doc-section">
+                        <h3>Pipeline CI/CD</h3>
+                        <p>El sistema utiliza GitHub Actions para automatizar el proceso de construcción, pruebas y despliegue.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DevOps Web - Implantación de Aplicaciones Web</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

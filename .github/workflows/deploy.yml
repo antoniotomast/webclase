@@ -1,0 +1,89 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+    
+    - name: Verificar archivos HTML
+      run: |
+        echo "Verificando estructura de archivos..."
+        ls -la
+        if [ -f "index.html" ]; then
+          echo "✓ index.html encontrado"
+        else
+          echo "✗ index.html no encontrado"
+          exit 1
+        fi
+    
+    - name: Validar HTML
+      run: |
+        echo "Validando sintaxis HTML..."
+        # Verificar que los archivos no están vacíos
+        if [ -s "index.html" ]; then
+          echo "✓ index.html tiene contenido"
+        else
+          echo "✗ index.html está vacío"
+          exit 1
+        fi
+    
+    - name: Construir imagen Docker
+      run: |
+        echo "Construyendo imagen Docker..."
+        docker build -t devops-web:${{ github.sha }} .
+        echo "✓ Imagen construida exitosamente"
+    
+    - name: Probar imagen Docker
+      run: |
+        echo "Probando contenedor Docker..."
+        docker run -d -p 8080:80 --name test-container devops-web:${{ github.sha }}
+        sleep 5
+        
+        # Verificar que el contenedor está corriendo
+        if docker ps | grep test-container; then
+          echo "✓ Contenedor está corriendo"
+        else
+          echo "✗ Contenedor no está corriendo"
+          docker logs test-container
+          exit 1
+        fi
+        
+        # Limpiar
+        docker stop test-container
+        docker rm test-container
+    
+    - name: Resultado del Build
+      run: |
+        echo "========================================="
+        echo "✓ Build completado exitosamente"
+        echo "✓ Todos los tests pasaron"
+        echo "✓ Listo para despliegue"
+        echo "========================================="
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+    
+    - name: Despliegue simulado
+      run: |
+        echo "========================================="
+        echo "Iniciando proceso de despliegue..."
+        echo "Entorno: Producción"
+        echo "Rama: ${{ github.ref }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "========================================="
+        echo "✓ Despliegue completado"
