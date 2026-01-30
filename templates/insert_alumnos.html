@@ -1,0 +1,18 @@
+{%extends "base.html" %}
+
+    {% block content %}
+
+    <div class="form-container">
+        <h1>📝 Insertar Alumno</h1>
+        <form method="post" action="/do_insertar_alumno" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+                <label for="nombre">Nombre del Alumno:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Introduce el nombre completo" required>
+            </div>
+            
+            <button type="submit">Guardar Alumno</button>
+        </form>
+        
+        <a href="/alumnos" class="back-link">← Volver a la lista de alumnos</a>
+    </div>
+    {% endblock %}

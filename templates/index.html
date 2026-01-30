@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.student-card').on('click', function() {
+            const studentId = $(this).data('id');
+            window.location.href = `/alumno/${studentId}`;
+        });
+    });
+</script>
+{% endblock %}
+

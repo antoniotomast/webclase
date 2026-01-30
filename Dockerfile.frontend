@@ -1,0 +1,19 @@
+# Dockerfile para el frontend (React + Vite)
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copiar package.json y package-lock.json
+COPY frontend/package*.json ./
+
+# Instalar dependencias
+RUN npm install
+
+# Copiar el resto del código
+COPY frontend/ .
+
+# Exponer el puerto 3000
+EXPOSE 3000
+
+# Comando para ejecutar el servidor de desarrollo
+CMD ["npm", "run", "dev", "--", "--host"]
