@@ -6,9 +6,11 @@ from routers import auth_router_api, actores_router
 import uvicorn
 
 # Crear la aplicación FastAPI
+# Versión 2.0 - CI/CD Automático con GitHub Actions + Watchtower
 app = FastAPI(
     title="API REST de Gestión de Actores",
-    description="API REST con autenticación para gestionar actores"
+    description="API REST con autenticación para gestionar actores",
+    version="2.0.0"
 )
 
 # ⭐ IMPORTANTE: Agregar CORS para permitir peticiones desde React
