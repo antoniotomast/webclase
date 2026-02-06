@@ -19,7 +19,7 @@ services:
       retries: 10
 
   backend:
-    image: ghcr.io/antoniotomast/webclase-backend:latest
+    image: att360/webclase-backend:latest
     container_name: webclase-backend
     ports:
       - "8000:8000"
@@ -43,7 +43,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
 
   frontend:
-    image: ghcr.io/antoniotomast/webclase-frontend:latest
+    image: att360/webclase-frontend:latest
     container_name: webclase-frontend
     ports:
       - "3000:3000"
@@ -67,7 +67,9 @@ services:
       - WATCHTOWER_LABEL_ENABLE=true
       - WATCHTOWER_INCLUDE_RESTARTING=true
       - WATCHTOWER_ROLLING_RESTART=true
+      - WATCHTOWER_DEBUG=true
       - DOCKER_API_VERSION=1.44
+    command: --interval 60
     networks:
       - webclase-network
     restart: unless-stopped
